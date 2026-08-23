@@ -1,0 +1,31 @@
+{
+  "name": "venom-freefire-bot",
+  "version": "1.0.0",
+  "description": "⚡ VENOM FreeFire — Pro 0-200 Headshot Sensitivity, Daily Redeem Codes & Gaming Utilities",
+  "type": "module",
+  "main": "src/bot.js",
+  "scripts": {
+    "start": "node src/bot.js",
+    "dev": "node --watch src/bot.js"
+  },
+  "keywords": [
+    "freefire-bot",
+    "garena-freefire",
+    "headshot-sensitivity",
+    "sensi-freefire",
+    "freefire-redeem-codes",
+    "telegraf",
+    "venom-bot"
+  ],
+  "author": "MR VENOM (MykelGoal)",
+  "license": "MIT",
+  "dependencies": {
+    "axios": "^1.7.7",
+    "dotenv": "^16.4.5",
+    "express": "^4.21.0",
+    "telegraf": "^4.16.3"
+  },
+  "engines": {
+    "node": ">=20.0.0"
+  }
+}

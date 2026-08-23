@@ -1,5 +1,6 @@
 import { SensiEngine } from '../services/sensiEngine.js';
 import { RedeemService } from '../services/redeemService.js';
+import { PlayerService } from '../services/playerService.js';
 import { NicknameStyler } from '../data/nicknames.js';
 import { Messages } from '../ui/messages.js';
 import { Keyboards } from '../ui/keyboards.js';
@@ -34,7 +35,6 @@ export class CommandHandlers {
       });
     }
 
-    // Return the top match
     const best = matches[0];
     const cardText = Messages.sensiCard(best, best.brandIcon || '📱');
 
@@ -42,6 +42,43 @@ export class CommandHandlers {
       parse_mode: 'HTML',
       ...Keyboards.sensiActions(best.brandKey)
     });
+  }
+
+  static async handlePlayer(ctx) {
+    const text = ctx.message.text || '';
+    const parts = text.split(' ').slice(1);
+    const uid = parts[0] ? parts[0].trim() : '';
+    const region = parts[1] ? parts[1].trim() : 'SG';
+
+    if (!uid) {
+      return ctx.reply(`
+🔍 <b>FREE FIRE PLAYER UID LOOKUP</b>
+━━━━━━━━━━━━━━━━━━━━━━━━━━
+Send your Free Fire UID like this:
+<code>/player &lt;UID&gt; [REGION]</code>
+
+<b>Example:</b>
+• <code>/player 198273645</code>
+• <code>/player 198273645 IND</code>
+`.trim(), {
+        parse_mode: 'HTML',
+        ...Keyboards.backToMenu()
+      });
+    }
+
+    await ctx.replyWithChatAction('typing');
+    try {
+      const profile = await PlayerService.getPlayerProfile(uid, region);
+      const card = Messages.playerProfileCard(profile);
+      return ctx.reply(card, {
+        parse_mode: 'HTML',
+        ...Keyboards.backToMenu()
+      });
+    } catch (err) {
+      return ctx.reply(`❌ <b>Lookup Failed:</b> ${err.message}`, {
+        parse_mode: 'HTML'
+      });
+    }
   }
 
   static async handleRedeem(ctx) {

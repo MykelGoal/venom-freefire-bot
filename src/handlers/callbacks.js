@@ -37,6 +37,27 @@ export class CallbackHandlers {
       });
     });
 
+    // Player UID Menu
+    bot.action('btn_menu_player', async (ctx) => {
+      await ctx.answerCbQuery();
+      const text = `
+🔍 <b>FREE FIRE PLAYER UID LOOKUP</b>
+━━━━━━━━━━━━━━━━━━━━━━━━━━
+Send your Free Fire UID to get full player profile stats:
+<code>/player &lt;UID&gt; [REGION]</code>
+
+<b>Examples:</b>
+• <code>/player 198273645</code>
+• <code>/player 198273645 IND</code>
+• <code>/player 198273645 BR</code>
+`.trim();
+
+      await editMessageTextSafe(ctx, text, {
+        parse_mode: 'HTML',
+        ...Keyboards.backToMenu()
+      });
+    });
+
     // Brand Selected ➔ List Models
     bot.action(/^btn_brand_(.+)$/, async (ctx) => {
       const brandKey = ctx.match[1];

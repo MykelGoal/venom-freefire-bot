@@ -13,11 +13,12 @@ export class Messages {
     return `
 ⚡ <b>VENOM FREE FIRE • PRO GAMING HUB</b>
 
-Hey <b>${name}</b>! Welcome to the #1 Garena Free Fire utility bot.
+Hey <b>${name}</b>! Welcome to the #1 Garena Free Fire companion bot.
 
 🎯 <b>What I Can Do:</b>
 • <b>Exact 0–200 Sensi:</b> Calibrated settings for 100+ phone models & PC.
 • 🎁 <b>Daily Redeem Codes:</b> Working vouchers with 1-tap copy.
+• 🔍 <b>Player UID Stalker:</b> Check level, rank, likes & guild stats.
 • 🔤 <b>Clan Nickname Styler:</b> 20+ pro symbol tags & fonts.
 • 🎮 <b>Tournament Room:</b> 1-click custom room announcer.
 
@@ -44,6 +45,24 @@ ${icon} <b>DEVICE:</b> <b>${this.escapeHtml(profile.name)}</b>
 🔫 <b>Best Guns:</b> <code>${profile.recommendedGuns}</code>
 ${profile.notes ? `💡 <i>${profile.notes}</i>\n` : ''}━━━━━━━━━━━━━━━━━━━━━━━━━━
 <i>(Enter these exact numbers in Free Fire Settings ➔ Sensitivity)</i>
+`.trim();
+  }
+
+  static playerProfileCard(profile) {
+    return `
+⚡ <b>FREE FIRE PLAYER PROFILE</b>
+━━━━━━━━━━━━━━━━━━━━━━━━━━
+👤 <b>Nickname:</b> <b>${this.escapeHtml(profile.nickname)}</b>
+🆔 <b>UID:</b> <code>${profile.uid}</code> <i>(Tap to copy)</i>
+━━━━━━━━━━━━━━━━━━━━━━━━━━
+⭐ <b>Level:</b> <code>${profile.level}</code> (EXP: ${profile.exp})
+👍 <b>Likes:</b> <code>${profile.likes}</code>
+🏆 <b>BR Rank:</b> <code>${profile.brRank}</code>
+⚔️ <b>CS Rank:</b> <code>${profile.csRank}</code>
+🏰 <b>Guild:</b> <code>${this.escapeHtml(profile.guildName)} (${profile.guildLevel})</code>
+🌐 <b>Region:</b> <code>${profile.region}</code>
+━━━━━━━━━━━━━━━━━━━━━━━━━━
+💬 <b>Signature:</b> <i>"${this.escapeHtml(profile.bio)}"</i>
 `.trim();
   }
 

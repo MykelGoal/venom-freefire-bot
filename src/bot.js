@@ -21,6 +21,7 @@ async function bootstrap() {
   // Register Slash Commands
   bot.start(CommandHandlers.handleStart);
   bot.command('sensi', CommandHandlers.handleSensi);
+  bot.command(['player', 'id', 'uid'], CommandHandlers.handlePlayer);
   bot.command('redeem', CommandHandlers.handleRedeem);
   bot.command('nick', CommandHandlers.handleNick);
   bot.command('room', CommandHandlers.handleRoom);
@@ -44,7 +45,7 @@ async function bootstrap() {
       service: 'VENOM-FREEFIRE-BOT',
       version: '1.0.0',
       author: 'MR VENOM (@MykelGoal)',
-      features: ['0-200 Calibrated Sensitivity', 'Daily Redeem Codes', 'Nickname Styler', 'Custom Room Announcer']
+      features: ['0-200 Calibrated Sensitivity', 'Daily Redeem Codes', 'Player UID Stalker', 'Nickname Styler', 'Custom Room Announcer']
     });
   });
 

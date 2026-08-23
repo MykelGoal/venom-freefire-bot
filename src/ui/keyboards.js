@@ -13,11 +13,11 @@ export class Keyboards {
         Markup.button.callback('🎁 Redeem Codes', 'btn_menu_redeem')
       ],
       [
-        Markup.button.callback('🔤 Nickname Styler', 'btn_menu_nick'),
-        Markup.button.callback('🎮 Custom Room Format', 'btn_menu_room')
+        Markup.button.callback('🔍 Player UID Stalker', 'btn_menu_player'),
+        Markup.button.callback('🔤 Nickname Styler', 'btn_menu_nick')
       ],
       [
-        Markup.button.callback('🔍 Search Phone Model', 'btn_search_prompt'),
+        Markup.button.callback('🎮 Custom Room Format', 'btn_menu_room'),
         Markup.button.callback('❓ Pro Drag Guide', 'btn_help')
       ]
     ]);

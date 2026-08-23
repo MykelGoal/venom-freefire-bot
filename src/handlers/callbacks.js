@@ -91,7 +91,7 @@ Send your Free Fire UID to get full player profile stats:
     // Redeem Codes Menu
     bot.action('btn_menu_redeem', async (ctx) => {
       await ctx.answerCbQuery('🎁 Loading active vouchers...');
-      const codes = RedeemService.getCodesByRegion('all');
+      const codes = await RedeemService.fetchLiveCodes('all');
       const text = Messages.redeemCodesCard(codes, 'All Servers (Select Below)');
 
       await editMessageTextSafe(ctx, text, {
@@ -107,7 +107,7 @@ Send your Free Fire UID to get full player profile stats:
       const regionObj = regions.find(r => r.key === regionKey) || regions[0];
 
       await ctx.answerCbQuery(`Loaded ${regionObj.label}`);
-      const codes = RedeemService.getCodesByRegion(regionKey);
+      const codes = await RedeemService.fetchLiveCodes(regionKey);
       const text = Messages.redeemCodesCard(codes, regionObj.label);
 
       await editMessageTextSafe(ctx, text, {

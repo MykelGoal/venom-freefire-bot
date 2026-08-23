@@ -60,6 +60,7 @@ Send your Free Fire UID like this:
 <b>Example:</b>
 • <code>/player 198273645</code>
 • <code>/player 198273645 IND</code>
+• <code>/player 198273645 BR</code>
 `.trim(), {
         parse_mode: 'HTML',
         ...Keyboards.backToMenu()
@@ -82,12 +83,13 @@ Send your Free Fire UID like this:
   }
 
   static async handleRedeem(ctx) {
-    const codes = RedeemService.getTodayCodes();
-    const text = Messages.redeemCodesCard(codes);
+    await ctx.replyWithChatAction('typing');
+    const codes = await RedeemService.fetchLiveCodes('all');
+    const text = Messages.redeemCodesCard(codes, 'All Servers');
 
     return ctx.reply(text, {
       parse_mode: 'HTML',
-      ...Keyboards.redeemActions()
+      ...Keyboards.redeemActions('all')
     });
   }
 
@@ -129,7 +131,7 @@ Send your Free Fire UID like this:
 ━━━━━━━━━━━━━━━━━━━━━━━━━━
 📶 <b>Ping Latency:</b> <code>${latency}ms</code>
 🎯 <b>Calibrated Devices:</b> <code>100+ Models (0–200 Sensi)</code>
-🎁 <b>Redeem Server:</b> <code>Active &amp; Verified</code>
+🎁 <b>Redeem Server:</b> <code>Dynamic Daily Rotation</code>
 🟢 <b>Uptime:</b> <code>24/7 Keep-Alive Online</code>
 ━━━━━━━━━━━━━━━━━━━━━━━━━━
 `.trim();

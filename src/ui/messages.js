@@ -17,7 +17,7 @@ Hey <b>${name}</b>! Welcome to the #1 Garena Free Fire companion bot.
 
 🎯 <b>What I Can Do:</b>
 • <b>Exact 0–200 Sensi:</b> Calibrated settings for 100+ phone models & PC.
-• 🎁 <b>Daily Redeem Codes:</b> Working vouchers with 1-tap copy.
+• 🎁 <b>Server Redeem Codes:</b> Working vouchers filtered by your region.
 • 🔍 <b>Player UID Stalker:</b> Check level, rank, likes & guild stats.
 • 🔤 <b>Clan Nickname Styler:</b> 20+ pro symbol tags & fonts.
 • 🎮 <b>Tournament Room:</b> 1-click custom room announcer.
@@ -66,19 +66,20 @@ ${profile.notes ? `💡 <i>${profile.notes}</i>\n` : ''}━━━━━━━━
 `.trim();
   }
 
-  static redeemCodesCard(codes = []) {
-    let text = `🎁 <b>FREE FIRE DAILY REDEEM CODES</b>\n`;
+  static redeemCodesCard(codes = [], regionLabel = 'All Servers') {
+    let text = `🎁 <b>FREE FIRE REDEEM CODES</b>\n`;
     text += `━━━━━━━━━━━━━━━━━━━━━━━━━━\n`;
-    text += `<i>Tap any code below to copy to clipboard:</i>\n\n`;
+    text += `🌐 <b>Selected Server:</b> <b>${this.escapeHtml(regionLabel)}</b>\n`;
+    text += `<i>(Tap any code below to copy to clipboard)</i>\n\n`;
 
     for (const c of codes) {
       text += `🔑 <code>${c.code}</code>\n`;
       text += `🎁 <b>Reward:</b> ${c.reward}\n`;
-      text += `🌐 <b>Server:</b> ${c.server}\n\n`;
+      text += `📍 <b>Valid Server:</b> <code>${c.server}</code>\n\n`;
     }
 
     text += `━━━━━━━━━━━━━━━━━━━━━━━━━━\n`;
-    text += `👉 <i>Redeem at official Garena site using the button below!</i>\n`;
+    text += `👉 <i>Select your exact server region below to avoid region errors!</i>\n`;
     return text.trim();
   }
 

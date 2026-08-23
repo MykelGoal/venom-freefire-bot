@@ -78,21 +78,35 @@ export class Keyboards {
   }
 
   /**
-   * Redeem Codes Action Buttons
+   * Redeem Codes Action Buttons with Server Region Switcher
    */
-  static redeemActions() {
-    return Markup.inlineKeyboard([
-      [
-        Markup.button.url('🔗 Garena Official Redeem Site', RedeemService.getRedemptionUrl())
-      ],
-      [
-        Markup.button.callback('🔄 Refresh Codes', 'btn_menu_redeem'),
-        Markup.button.callback('🎯 Headshot Sensi', 'btn_menu_sensi')
-      ],
-      [
-        Markup.button.callback('🏠 Main Menu', 'btn_main_menu')
-      ]
+  static redeemActions(activeRegion = 'all') {
+    const regions = RedeemService.getRegions();
+    const rows = [];
+
+    // Region Switcher Grid
+    for (let i = 0; i < regions.length; i += 2) {
+      const row = [];
+      const isA = regions[i].key === activeRegion;
+      row.push(Markup.button.callback(`${isA ? '✅ ' : ''}${regions[i].label}`, `btn_region_${regions[i].key}`));
+
+      if (regions[i + 1]) {
+        const isB = regions[i + 1].key === activeRegion;
+        row.push(Markup.button.callback(`${isB ? '✅ ' : ''}${regions[i + 1].label}`, `btn_region_${regions[i + 1].key}`));
+      }
+      rows.push(row);
+    }
+
+    rows.push([
+      Markup.button.url('🔗 Garena Official Redeem Site', RedeemService.getRedemptionUrl())
     ]);
+
+    rows.push([
+      Markup.button.callback('🎯 Headshot Sensi', 'btn_menu_sensi'),
+      Markup.button.callback('🏠 Main Menu', 'btn_main_menu')
+    ]);
+
+    return Markup.inlineKeyboard(rows);
   }
 
   /**

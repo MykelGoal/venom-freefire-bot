@@ -8,6 +8,43 @@ export class Messages {
       .replace(/"/g, '&quot;');
   }
 
+  static verifySubscriptionRequired() {
+    return `
+⚡ <b>VENOM VERIFICATION REQUIRED</b>
+━━━━━━━━━━━━━━━━━━━━━━━━━━
+To access <b>VENOM FreeFire</b> (0–200 Sensi & Redeem Codes), please support our YouTube channel!
+
+1️⃣ Click the <b>🔴 Subscribe on YouTube</b> button below.
+2️⃣ Tap <b>✅ I Have Subscribed / Unlock Bot</b> to gain full access!
+━━━━━━━━━━━━━━━━━━━━━━━━━━
+<i>Thank you for supporting the VENOM ecosystem!</i>
+`.trim();
+  }
+
+  static verifiedSuccess() {
+    return `
+🎉 <b>ACCESS UNLOCKED!</b>
+
+Thank you for subscribing to <b>@venommdbot</b>!
+Your Free Fire gaming suite is now fully active.
+`.trim();
+  }
+
+  static exploreVenomSeries() {
+    return `
+⚡ <b>THE VENOM BOT SERIES</b>
+━━━━━━━━━━━━━━━━━━━━━━━━━━
+📬 <b>@VenomTempMailBot</b> — 1-Click Temp Mail & Instant OTP
+🎮 <b>@VenomFreeFireBot</b> — 0–200 Sensi & Diamond Store
+🚀 <b>@VenomPulseBot</b> — Universal HD Video & Music Downloader
+⚽ <b>@VenomPredictBot</b> — Live Match Scores & Predictions
+💬 <b>@VenomMDBot</b> — WhatsApp Multi-Device 600+ Plugin Bot
+━━━━━━━━━━━━━━━━━━━━━━━━━━
+📺 <b>YouTube:</b> <a href="https://youtube.com/@venommdbot">youtube.com/@venommdbot</a>
+⭐ <b>GitHub:</b> <a href="https://github.com/MykelGoal">github.com/MykelGoal</a>
+`.trim();
+  }
+
   static welcome(user) {
     const name = this.escapeHtml(user?.first_name || 'Gamer');
     return `

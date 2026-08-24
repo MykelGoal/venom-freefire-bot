@@ -17,8 +17,36 @@ export class Keyboards {
         Markup.button.callback('🔤 Nickname Styler', 'btn_menu_nick')
       ],
       [
-        Markup.button.callback('🎮 Custom Room Format', 'btn_menu_room'),
-        Markup.button.callback('❓ Pro Drag Guide', 'btn_help')
+        Markup.button.callback('⚡ Explore VENOM Bots', 'btn_venom_series'),
+        Markup.button.callback('🎮 Custom Room', 'btn_menu_room')
+      ]
+    ]);
+  }
+
+  /**
+   * YouTube Subscription Gate Keyboard
+   */
+  static subscriptionGate() {
+    return Markup.inlineKeyboard([
+      [
+        Markup.button.url('🔴 Subscribe on YouTube (@venommdbot)', 'https://www.youtube.com/@venommdbot?sub_confirmation=1')
+      ],
+      [
+        Markup.button.callback('✅ I Have Subscribed / Unlock Bot', 'btn_verify_sub')
+      ]
+    ]);
+  }
+
+  /**
+   * Explore VENOM Series Actions
+   */
+  static exploreSeries() {
+    return Markup.inlineKeyboard([
+      [
+        Markup.button.url('📺 Subscribe on YouTube (@venommdbot)', 'https://www.youtube.com/@venommdbot?sub_confirmation=1')
+      ],
+      [
+        Markup.button.callback('⬅️ Back to Menu', 'btn_main_menu')
       ]
     ]);
   }
@@ -84,7 +112,6 @@ export class Keyboards {
     const regions = RedeemService.getRegions();
     const rows = [];
 
-    // Region Switcher Grid
     for (let i = 0; i < regions.length; i += 2) {
       const row = [];
       const isA = regions[i].key === activeRegion;

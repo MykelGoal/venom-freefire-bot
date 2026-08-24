@@ -4,9 +4,19 @@ import { PlayerService } from '../services/playerService.js';
 import { NicknameStyler } from '../data/nicknames.js';
 import { Messages } from '../ui/messages.js';
 import { Keyboards } from '../ui/keyboards.js';
+import { db } from '../storage/database.js';
 
 export class CommandHandlers {
   static async handleStart(ctx) {
+    const userId = ctx.from.id;
+
+    if (!db.isUserVerified(userId)) {
+      return ctx.reply(Messages.verifySubscriptionRequired(), {
+        parse_mode: 'HTML',
+        ...Keyboards.subscriptionGate()
+      });
+    }
+
     const text = Messages.welcome(ctx.from);
     return ctx.reply(text, {
       parse_mode: 'HTML',
@@ -15,6 +25,14 @@ export class CommandHandlers {
   }
 
   static async handleSensi(ctx) {
+    const userId = ctx.from.id;
+    if (!db.isUserVerified(userId)) {
+      return ctx.reply(Messages.verifySubscriptionRequired(), {
+        parse_mode: 'HTML',
+        ...Keyboards.subscriptionGate()
+      });
+    }
+
     const text = ctx.message.text || '';
     const parts = text.split(' ').slice(1);
     const query = parts.join(' ').trim();
@@ -45,6 +63,14 @@ export class CommandHandlers {
   }
 
   static async handlePlayer(ctx) {
+    const userId = ctx.from.id;
+    if (!db.isUserVerified(userId)) {
+      return ctx.reply(Messages.verifySubscriptionRequired(), {
+        parse_mode: 'HTML',
+        ...Keyboards.subscriptionGate()
+      });
+    }
+
     const text = ctx.message.text || '';
     const parts = text.split(' ').slice(1);
     const uid = parts[0] ? parts[0].trim() : '';
@@ -83,6 +109,14 @@ Send your Free Fire UID like this:
   }
 
   static async handleRedeem(ctx) {
+    const userId = ctx.from.id;
+    if (!db.isUserVerified(userId)) {
+      return ctx.reply(Messages.verifySubscriptionRequired(), {
+        parse_mode: 'HTML',
+        ...Keyboards.subscriptionGate()
+      });
+    }
+
     await ctx.replyWithChatAction('typing');
     const codes = await RedeemService.fetchLiveCodes('all');
     const text = Messages.redeemCodesCard(codes, 'All Servers');

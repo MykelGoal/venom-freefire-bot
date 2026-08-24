@@ -3,6 +3,7 @@ import { RedeemService } from '../services/redeemService.js';
 import { NicknameStyler } from '../data/nicknames.js';
 import { Messages } from '../ui/messages.js';
 import { Keyboards } from '../ui/keyboards.js';
+import { db } from '../storage/database.js';
 
 async function editMessageTextSafe(ctx, text, extra = {}) {
   try {
@@ -17,6 +18,29 @@ async function editMessageTextSafe(ctx, text, extra = {}) {
 
 export class CallbackHandlers {
   static async register(bot) {
+    // YouTube Subscription Gate Callback
+    bot.action('btn_verify_sub', async (ctx) => {
+      const userId = ctx.from.id;
+      db.verifyUser(userId);
+      await ctx.answerCbQuery('🎉 Access Unlocked! Welcome to VENOM.');
+
+      const text = `${Messages.verifiedSuccess()}\n\n${Messages.welcome(ctx.from)}`;
+      await editMessageTextSafe(ctx, text, {
+        parse_mode: 'HTML',
+        ...Keyboards.mainMenu()
+      });
+    });
+
+    // Explore VENOM Series
+    bot.action('btn_venom_series', async (ctx) => {
+      await ctx.answerCbQuery();
+      await editMessageTextSafe(ctx, Messages.exploreVenomSeries(), {
+        parse_mode: 'HTML',
+        disable_web_page_preview: true,
+        ...Keyboards.exploreSeries()
+      });
+    });
+
     // Main Menu
     bot.action('btn_main_menu', async (ctx) => {
       await ctx.answerCbQuery();
